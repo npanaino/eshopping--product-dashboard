@@ -114,12 +114,6 @@ public class ProductsController {
 			System.out.println(e.getMessage());
 		}
 
-		System.out.println();
-		System.out.println();
-		products.forEach(p -> System.out.println("id:" + p.getId() + "," + "dpercentaje:" + p.getDiscountPercentage() + "," + "dprice:" + p.getDiscountedPrice()));
-		System.out.println();
-		System.out.println();
-
 		return products;
 	}
 
