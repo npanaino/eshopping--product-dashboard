@@ -1,27 +1,29 @@
-package com.hackerrank.eshopping.product.dashboard.model;
+package com.hackerrank.eshopping.product.dashboard.dto;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+@JsonFormat
+public class ProductDTO {
 
-@Entity
-public class Product implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
+	@JsonProperty("id")
 	private Long id;
+	@JsonProperty("name")
 	private String name;
+	@JsonProperty("category")
 	private String category;
+	@JsonProperty("retail_price")
 	private Double retailPrice;
+	@JsonProperty("discounted_price")
 	private Double discountedPrice;
+	@JsonProperty("availability")
 	private Boolean availability;
 
-	public Product() {
+	public ProductDTO() {
 	}
 
-	public Product(Long id, String name, String category, Double retailPrice, Double discountedPrice,
+	public ProductDTO(Long id, String name, String category, Double retailPrice, Double discountedPrice,
 			Boolean availability) {
 		this.id = id;
 		this.name = name;
@@ -79,4 +81,8 @@ public class Product implements Serializable {
 		this.availability = availability;
 	}
 
+	@JsonIgnore
+	public Integer getDiscountPercentage() {
+		return new Double(Math.round(((this.retailPrice - this.discountedPrice) / this.retailPrice) * 100)).intValue();
+	}
 }
